@@ -1,0 +1,11 @@
+[main] D EnvironmentProperty - ( >>>>>>> Environment name : env_int
+[main] D EnvironmentProperty - ( #### Loading property from uri file:/C:/Selenium_Java_course/AdditionalExercice/target/classes/env_int
+[main] D EnvironmentProperty - ( ****Loading environment property env_name = int 
+[main] D EnvironmentProperty - ( ****Loading environment property eTitle = Selenium 
+[main] D EnvironmentProperty - ( ****Loading environment property appUrl = https://demo.aspnetawesome.com/ 
+[main] D EnvironmentProperty - ( #### Properties loaded from env_int : 3 
+[main] D i.g.b.wdm.cache.ResolutionCache - ( Resolution chrome=100 in cache (valid until 09:26:53 19/04/2022 CEST)
+[main] D i.g.b.wdm.cache.ResolutionCache - ( Resolution chrome100=100.0.4896.60 in cache (valid until 08:26:53 20/04/2022 CEST)
+[main] I i.g.bonigarcia.wdm.WebDriverManager - ( Using chromedriver 100.0.4896.60 (resolved driver for Chrome 100)
+[main] D i.g.bonigarcia.wdm.WebDriverManager - ( Driver chromedriver 100.0.4896.60 found in cache
+[main] I i.g.bonigarcia.wdm.WebDriverManager - ( Exporting webdriver.chrome.driver as C:\Users\kaczmaa5\.cache\selenium\chromedriver\win32\100.0.4896.60\chromedriver.exe
