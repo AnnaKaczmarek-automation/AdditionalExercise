@@ -3,16 +3,12 @@ package pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Month;
 import java.util.List;
-import java.util.Random;
 
 public class PopupFormPage extends BasePage {
-//    public PopupFormPage(WebDriver driver) {
-//        PageFactory.initElements(driver, this);
-//    }
-
 
     @FindBy(xpath = "//input[@id='createDinnerName-awed']")
     private WebElement nameInput;
@@ -63,10 +59,34 @@ public class PopupFormPage extends BasePage {
     private List<WebElement> chefsList;
 
     @FindBy(xpath = "//div[@data-i='createDinnerChef-awepw']/div[@class='o-pbtns']/button[text()='OK']")
-    private WebElement okBtn;
+    private WebElement chefsOkBtn;
 
     @FindBy(xpath = "//div[@class='awe-display']/div[@class='awe-caption']")
     private WebElement chefNameField;
+
+    @FindBy(xpath = "//ul[@class='awe-ajaxlist awe-lookup-list awe-srl']/li[@class='awe-li']")
+    private List<WebElement> ingredientsList;
+
+    @FindBy(xpath = "//ul[@class='awe-ajaxlist awe-lookup-list awe-srl']/li[@class='awe-li awe-morecont']/div[@class='awe-morebtn']")
+    private WebElement moreBtn;
+
+    @FindBy(xpath = "//div[@class='awe-list awe-selcont']")
+    private WebElement boxForMeals;
+
+    @FindBy(xpath = "//div[@data-i='createDinnerMeals-awepw']/div[@class='o-pbtns']/button[text()='OK']")
+    private WebElement mealsOkBtn;
+
+    @FindBy(xpath = "//button[@id='createDinnerBonusMealId-awed']/div[@class='o-slbtn']/i[@class='o-caret']")
+    private WebElement openingBonusMealBtn;
+
+    @FindBy(xpath = "//div[@class='o-menu o-pu open']/div[@class='o-itsc']")
+    private WebElement bonusMealOptions;
+
+    @FindBy(xpath = "//li[@class='o-itm o-v o-ditm']")
+    private List<WebElement> bonusMealsList;
+
+    @FindBy(xpath = "//div[@data-i='createDinner']/div[@class='o-pbtns']/button[@class='awe-btn awe-okbtn o-pbtn']")
+    private WebElement mainOkBtn;
 
     public PopupFormPage(WebDriver driver) {
         super(driver);
@@ -76,7 +96,6 @@ public class PopupFormPage extends BasePage {
     public void setName(String firstName) {
         waitForVisibility(nameInput);
         nameInput.sendKeys(firstName);
-
     }
 
     public void openDataPicker() {
@@ -99,7 +118,6 @@ public class PopupFormPage extends BasePage {
         findYearInCalendar(year);
         findMonthInCalendar(month);
         findDayInCalendar(day);
-
     }
 
     public void findYearInCalendar(String year) {
@@ -112,8 +130,6 @@ public class PopupFormPage extends BasePage {
         js.executeScript("arguments[0].scrollIntoView();", expectedYear);
         waitForVisibility(expectedYear);
         clickOnElement(expectedYear);
-
-
     }
 
     public void findMonthInCalendar(String month) {
@@ -141,22 +157,60 @@ public class PopupFormPage extends BasePage {
         waitUntilElementIsClickable(searchChefBtn);
         clickOnElement(searchChefBtn);
         waitForVisibility(chefOptions);
-        System.out.println(chefOptions.getSize());
-        Random rand = new Random();
-        int randomChef = rand.nextInt(chefsList.size());
-
-        WebElement expectedChef = chefsList.get(randomChef);
+        waitForVisibilityOfElements(chefsList);
+        waitForVisibility(chefsList.get(getRandomListIndex(chefsList)));
+        WebElement expectedChef = chefsList.get(getRandomListIndex(chefsList));
+        waitForVisibility(expectedChef);
         String expectedValue = expectedChef.getText();
         expectedChef.click();
-        clickOnElement(okBtn);
+        clickOnElement(chefsOkBtn);
+        wait.until(ExpectedConditions.textToBePresentInElement(chefNameField, expectedValue));
         String actualValue = getWebElementText(chefNameField);
         verifyIfElementsEquals(expectedValue, actualValue);
     }
 
     public void chooseMeals() {
+        waitUntilElementIsClickable(searchMealBtn);
+        clickOnElement(searchMealBtn);
 
+        int i = 0;
+        while (i < 3) {
+            waitForVisibilityOfElements(ingredientsList);
+            int randomIndex = getRandomListIndex(ingredientsList);
+            WebElement ingredient = ingredientsList.get(randomIndex);
+            if (ingredient.isDisplayed()) {
+                actions.dragAndDrop(ingredient,boxForMeals );
+                log.info(ingredient.getText() +" was chosen");
+            } else {
+                waitForVisibility(moreBtn);
+                clickOnElement(moreBtn);
+                waitForVisibility(ingredient);
+                actions.dragAndDrop(ingredient,boxForMeals );
+                log.info(ingredient.getText() +" was chosen");
+            }
+            i++;
+        }
+        waitUntilElementIsClickable(mealsOkBtn);
+        clickOnElement(mealsOkBtn);
     }
 
+    public void chooseBonusMeal(){
+        waitForVisibility(openingBonusMealBtn);
+        clickOnElement(openingBonusMealBtn);
+        waitForVisibility(bonusMealOptions);
+        WebElement randomBonusMeal = bonusMealsList.get(getRandomListIndex(bonusMealsList));
+        clickOnElement(randomBonusMeal);
+        waitForVisibility(mainOkBtn);
+        clickOnElement(mainOkBtn);
+    }
+
+   public void verifyPopupText(){
+       String actualText = getTextFromAlert();
+       String expectedText = System.getProperty("alertText");
+       verifyIfElementsEquals(expectedText, actualText);
+       acceptAlert();
+
+   }
 
     public Integer changeMonthValuesIntoInteger(String month) {
         int monthInt = 0;
@@ -229,23 +283,25 @@ public class PopupFormPage extends BasePage {
 
 
     public void findDayInCalendar(String day) {
-//        waitForVisibility((WebElement) listOfWeeks);
         for (WebElement week : listOfWeeks) {
-            List<WebElement> allDaysInWeek = week.findElements(By.xpath("//td[@class='o-day o-mday o-enb']"));
+            List<WebElement> allDaysInWeek = week.findElements(By.xpath("//td[contains(@class,'o-day o-mday ')]"));
             for (WebElement dayOnTheList : allDaysInWeek) {
                 String dayValue = dayOnTheList.getText();
                 System.out.println(dayValue);
                 if (dayValue.equals(day)) {
+                    waitForVisibility(dayOnTheList);
+                    System.out.println("element is visible");
                     waitUntilElementIsClickable(dayOnTheList);
+                    System.out.println("element is clickable");
                     dayOnTheList.click();
                     driver.navigate().refresh();
                     try {
                         dayOnTheList.click();
                     } catch (StaleElementReferenceException e) {
-                        List<WebElement> allDaysInWeekRefreshed = week.findElements(By.xpath("//td[@class='o-day o-mday o-enb']"));
-                        for (WebElement dayOnTheListRefreshed : allDaysInWeek) {
-                            String dayValueRefreshed = dayOnTheList.getText();
-                            if (dayValue.equals(day)) {
+                        List<WebElement> allDaysInWeekRefreshed = week.findElements(By.xpath("//td[contains(@class,'o-day o-mday ')]"));
+                        for (WebElement dayOnTheListRefreshed : allDaysInWeekRefreshed) {
+                            String dayValueRefreshed = dayOnTheListRefreshed.getText();
+                            if (dayValueRefreshed.equals(day)) {
                                 waitUntilElementIsClickable(dayOnTheList);
                                 dayOnTheList.click();
                             }
@@ -254,8 +310,6 @@ public class PopupFormPage extends BasePage {
                     }
                 }
             }
-
-
         }
     }
 }

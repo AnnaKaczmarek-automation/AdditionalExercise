@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.Random;
+
 public class BasePage{
 
     protected WebDriver driver;
@@ -42,10 +45,30 @@ public class BasePage{
     }
 
     public void waitUntilElementIsClickable(WebElement element) {
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.elementToBeClickable(element));
 
     }
+    public void waitForVisibilityOfElements(List<WebElement> elements) {
+        wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
+
+    public Integer getRandomListIndex(List<WebElement> webElementList){
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(webElementList.size());
+        return randomIndex;
+    }
+
+    public String getTextFromAlert(){
+        String result = driver.switchTo().alert().getText();
+        return result;
+    }
+
+    public void acceptAlert(){
+        driver.switchTo().alert().accept();
+    }
+
 
     public void scrollUntilVisible(WebDriver driver, WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;

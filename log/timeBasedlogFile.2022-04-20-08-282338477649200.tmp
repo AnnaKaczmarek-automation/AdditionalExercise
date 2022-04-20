@@ -1,0 +1,114 @@
+[main] D EnvironmentProperty - ( >>>>>>> Environment name : env_int
+[main] D EnvironmentProperty - ( #### Loading property from uri file:/C:/Selenium_Java_course/AdditionalExercice/target/classes/env_int
+[main] D EnvironmentProperty - ( ****Loading environment property firstName = Ania 
+[main] D EnvironmentProperty - ( ****Loading environment property env_name = int 
+[main] D EnvironmentProperty - ( ****Loading environment property month = May 
+[main] D EnvironmentProperty - ( ****Loading environment property year = 2025 
+[main] D EnvironmentProperty - ( ****Loading environment property eTitle = Selenium 
+[main] D EnvironmentProperty - ( ****Loading environment property appUrl = https://demo.aspnetawesome.com/ 
+[main] D EnvironmentProperty - ( ****Loading environment property day = 21 
+[main] D EnvironmentProperty - ( #### Properties loaded from env_int : 7 
+[main] I BaseData.BaseTest.class - ( Properties are set to system
+[main] I BaseData.BaseTest.class - ( Browser properties are set to the system
+[main] D i.g.b.wdm.cache.ResolutionCache - ( Resolution chrome=100 in cache (valid until 09:15:33 20/04/2022 CEST)
+[main] D i.g.b.wdm.cache.ResolutionCache - ( Removing resolution chrome100=100.0.4896.60 from cache (expired on Wed Apr 20 08:26:53 CEST 2022)
+[main] D o.a.h.c.h.i.c.InternalHttpClient - ( ex-00000001: preparing request execution
+[main] D o.a.h.c.h.p.RequestAddCookies - ( Cookie spec selected: strict
+[main] D o.a.h.c.h.protocol.RequestAuthCache - ( Auth cache not set in the context
+[main] D o.a.h.c.h.impl.classic.ProtocolExec - ( ex-00000001: target auth state: UNCHALLENGED
+[main] D o.a.h.c.h.impl.classic.ProtocolExec - ( ex-00000001: proxy auth state: UNCHALLENGED
+[main] D o.a.h.c.h.impl.classic.ConnectExec - ( ex-00000001: acquiring connection with route {s}->https://chromedriver.storage.googleapis.com:443
+[main] D o.a.h.c.h.i.c.InternalHttpClient - ( ex-00000001: acquiring endpoint (3 MINUTES)
+[main] D o.a.h.c.h.i.i.PoolingHttpClientConnectionManager - ( ex-00000001: endpoint lease request (3 MINUTES) [route: {s}->https://chromedriver.storage.googleapis.com:443][total available: 0; route allocated: 0 of 5; total allocated: 0 of 25]
+[main] D o.a.h.c.h.i.i.PoolingHttpClientConnectionManager - ( ex-00000001: endpoint leased [route: {s}->https://chromedriver.storage.googleapis.com:443][total available: 0; route allocated: 1 of 5; total allocated: 1 of 25]
+[main] D o.a.h.c.h.i.i.PoolingHttpClientConnectionManager - ( ex-00000001: acquired ep-00000000
+[main] D o.a.h.c.h.i.c.InternalHttpClient - ( ex-00000001: acquired endpoint ep-00000000
+[main] D o.a.h.c.h.impl.classic.ConnectExec - ( ex-00000001: opening connection {s}->https://chromedriver.storage.googleapis.com:443
+[main] D o.a.h.c.h.i.c.InternalHttpClient - ( ep-00000000: connecting endpoint (30 SECONDS)
+[main] D o.a.h.c.h.i.i.PoolingHttpClientConnectionManager - ( ep-00000000: connecting endpoint to https://chromedriver.storage.googleapis.com:443 (30 SECONDS)
+[main] D o.a.h.c.h.i.i.DefaultHttpClientConnectionOperator - ( http-outgoing-0: connecting to chromedriver.storage.googleapis.com/216.58.208.208:443
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - ( Connecting socket to chromedriver.storage.googleapis.com/216.58.208.208:443 with timeout 30 SECONDS
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - ( Enabled protocols: [TLSv1.3, TLSv1.2]
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - ( Enabled cipher suites: [TLS_AES_256_GCM_SHA384, TLS_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_DSS_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_DSS_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_EMPTY_RENEGOTIATION_INFO_SCSV]
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - ( Starting handshake
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - ( Secure session established
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - (  negotiated protocol: TLSv1.3
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - (  negotiated cipher suite: TLS_AES_256_GCM_SHA384
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - (  peer principal: CN=*.storage.googleapis.com
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - (  peer alternative names: [*.storage.googleapis.com, *.googleapis.com, commondatastorage.googleapis.com, *.commondatastorage.googleapis.com, storage.googleapis.com, storage.mtls.googleapis.com, *.appspot.com.storage.googleapis.com, *.content-storage.googleapis.com, *.content-storage-p2.googleapis.com, *.content-storage-upload.googleapis.com, *.content-storage-download.googleapis.com, *.storage-upload.googleapis.com, *.storage-download.googleapis.com]
+[main] D o.a.h.c.h.s.SSLConnectionSocketFactory - (  issuer principal: CN=GTS CA 1C3, O=Google Trust Services LLC, C=US
+[main] D o.a.h.c.h.i.i.DefaultHttpClientConnectionOperator - ( http-outgoing-0: connection established 192.168.0.196:50829<->216.58.208.208:443
+[main] D o.a.h.c.h.i.i.PoolingHttpClientConnectionManager - ( ep-00000000: connected http-outgoing-0
+[main] D o.a.h.c.h.i.c.InternalHttpClient - ( ep-00000000: endpoint connected
+[main] D o.a.h.c.h.i.classic.MainClientExec - ( ex-00000001: executing GET /LATEST_RELEASE_100 HTTP/1.1
+[main] D o.a.h.c.h.i.c.InternalHttpClient - ( ep-00000000: start execution ex-00000001
+[main] D o.a.h.c.h.i.i.PoolingHttpClientConnectionManager - ( ep-00000000: executing exchange ex-00000001 over http-outgoing-0
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 >> GET /LATEST_RELEASE_100 HTTP/1.1
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 >> user-agent: Apache-HttpClient/5.0
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 >> accept-encoding: gzip, deflate, br
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 >> cache-control: max-age=0
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 >> connection: keep-alive
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 >> Host: chromedriver.storage.googleapis.com
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 >> "GET /LATEST_RELEASE_100 HTTP/1.1[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 >> "user-agent: Apache-HttpClient/5.0[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 >> "accept-encoding: gzip, deflate, br[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 >> "cache-control: max-age=0[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 >> "connection: keep-alive[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 >> "Host: chromedriver.storage.googleapis.com[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 >> "[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "X-GUploader-UploadID: ADPycdvO6BUaHJnwBrkGkNxrASULg20v6r3wLugDqnf0cAHs-lEONzOmlrzBiclgjx24BkOdO3tmSwwsfV4luY5wlLVv6w[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "x-goog-generation: 1648624005669881[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "x-goog-metageneration: 1[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "x-goog-stored-content-encoding: identity[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "x-goog-stored-content-length: 13[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "x-goog-hash: crc32c=bGnB7Q==[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "x-goog-hash: md5=eQ22mvWu3MUE9TlSwnUh+g==[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "x-goog-storage-class: STANDARD[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Accept-Ranges: bytes[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Content-Length: 13[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Server: UploadServer[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Date: Wed, 20 Apr 2022 05:30:12 GMT[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Expires: Wed, 20 Apr 2022 06:30:12 GMT[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Cache-Control: public, max-age=3600[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Age: 3510[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Last-Modified: Wed, 30 Mar 2022 07:06:45 GMT[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "ETag: "790db69af5aedcc504f53952c27521fa"[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Content-Type: text/plain[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "[\r][\n]"
+[main] D org.apache.hc.client5.http.wire - ( http-outgoing-0 << "100.0.4896.60"
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << HTTP/1.1 200 OK
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << X-GUploader-UploadID: ADPycdvO6BUaHJnwBrkGkNxrASULg20v6r3wLugDqnf0cAHs-lEONzOmlrzBiclgjx24BkOdO3tmSwwsfV4luY5wlLVv6w
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << x-goog-generation: 1648624005669881
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << x-goog-metageneration: 1
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << x-goog-stored-content-encoding: identity
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << x-goog-stored-content-length: 13
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << x-goog-hash: crc32c=bGnB7Q==
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << x-goog-hash: md5=eQ22mvWu3MUE9TlSwnUh+g==
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << x-goog-storage-class: STANDARD
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Accept-Ranges: bytes
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Content-Length: 13
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Server: UploadServer
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Date: Wed, 20 Apr 2022 05:30:12 GMT
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Expires: Wed, 20 Apr 2022 06:30:12 GMT
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Cache-Control: public, max-age=3600
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Age: 3510
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Last-Modified: Wed, 30 Mar 2022 07:06:45 GMT
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << ETag: "790db69af5aedcc504f53952c27521fa"
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Content-Type: text/plain
+[main] D org.apache.hc.client5.http.headers - ( http-outgoing-0 << Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+[main] D o.a.h.c.h.i.classic.MainClientExec - ( ex-00000001: connection can be kept alive for 3 MINUTES
+[main] D o.a.h.c.h.i.c.InternalHttpClient - ( ep-00000000: releasing valid endpoint
+[main] D o.a.h.c.h.i.i.PoolingHttpClientConnectionManager - ( ep-00000000: releasing endpoint
+[main] D o.a.h.c.h.i.i.PoolingHttpClientConnectionManager - ( ep-00000000: connection http-outgoing-0 can be kept alive for 3 MINUTES
+[main] D o.a.h.c.h.i.i.PoolingHttpClientConnectionManager - ( ep-00000000: connection released [route: {s}->https://chromedriver.storage.googleapis.com:443][total available: 1; route allocated: 1 of 5; total allocated: 1 of 25]
+[main] D i.g.b.wdm.versions.VersionDetector - ( Latest version of chromedriver according to https://chromedriver.storage.googleapis.com/LATEST_RELEASE_100 is 100.0.4896.60
+[main] I i.g.bonigarcia.wdm.WebDriverManager - ( Using chromedriver 100.0.4896.60 (resolved driver for Chrome 100)
+[main] D i.g.b.wdm.cache.ResolutionCache - ( Storing resolution chrome100=100.0.4896.60 in cache (valid until 08:28:42 21/04/2022 CEST)
+[main] D i.g.bonigarcia.wdm.WebDriverManager - ( Driver chromedriver 100.0.4896.60 found in cache
+[main] I i.g.bonigarcia.wdm.WebDriverManager - ( Exporting webdriver.chrome.driver as C:\Users\kaczmaa5\.cache\selenium\chromedriver\win32\100.0.4896.60\chromedriver.exe
+[main] I PopUpFormDemoTest - ( Cookies popup is closed
+[main] I PopUpFormDemoTest - ( PopupForm button is chosen
+[main] I PopUpFormDemoTest - ( Create button button is chosen
+[main] I PopUpFormDemoTest - ( Name is set Name field

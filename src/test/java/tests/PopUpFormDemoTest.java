@@ -28,9 +28,16 @@ public class PopUpFormDemoTest extends TestBase {
         log.info("Create button button is chosen");
         popupFormPage.setName(System.getProperty("firstName"));
         log.info("Name is set Name field");
-//        popupFormPage.chooseDate(System.getProperty("year"), System.getProperty("month"), System.getProperty("day"));
-//        popupFormPage.waitUntilDataPickerIsClosed();
+        popupFormPage.chooseDate(System.getProperty("year"), System.getProperty("month"), System.getProperty("day"));
+        popupFormPage.waitUntilDataPickerIsClosed();
         popupFormPage.chooseChef();
+        log.info("Chef option is chosen");
+        popupFormPage.chooseMeals();
+        log.info("Meals ale chosen");
+        popupFormPage.chooseBonusMeal();
+        log.info("Bonus meal is chosen");
+//        popupFormPage.verifyPopupText();
+//        log.info("Popup message is correct");
 
 
     }

@@ -27,10 +27,8 @@ public class EnvironmentProperty {
     private String year = "2024";
     private String month = "June";
     private String day = "22";
-//    private String secondName = "Kowalska";
-//    private String mail = "karolina@wp.pl";
-//    private String age = "28";
-//    private String continent = "europe";
+    private String alertText = "dinner created";
+
 
     private EnvironmentProperty() {
         this.app_environment = initAppEnvironment();
@@ -49,6 +47,7 @@ public class EnvironmentProperty {
         this.year = PropertiesStore.ENVIRONMENT.isSpecified() ? PropertiesStore.ENVIRONMENT.getValue() : this.year;
         this.month = PropertiesStore.ENVIRONMENT.isSpecified() ? PropertiesStore.ENVIRONMENT.getValue() : this.month;
         this.day = PropertiesStore.ENVIRONMENT.isSpecified() ? PropertiesStore.ENVIRONMENT.getValue() : this.day;
+        this.alertText = PropertiesStore.ENVIRONMENT.isSpecified() ? PropertiesStore.ENVIRONMENT.getValue() : this.alertText;
     }
     private static String initAppEnvironment() {
         return PropertiesStore.ENVIRONMENT.isSpecified() ? PropertiesStore.ENVIRONMENT.getValue() : "";
