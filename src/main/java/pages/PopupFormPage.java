@@ -1,5 +1,6 @@
 package pages;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Month;
 import java.util.List;
 
 public class PopupFormPage extends BasePage {
@@ -102,7 +105,13 @@ public class PopupFormPage extends BasePage {
     public void setName(String firstName) {
         waitForVisibility(nameInput);
         highlightElements(nameInput);
-        nameInput.sendKeys(firstName);
+        if (StringUtils.isAlpha(firstName)) {
+            nameInput.sendKeys(firstName);
+        } else {
+            log.info("Name input must be a string. Change requirements.");
+            driver.quit();
+        }
+
     }
 
     public void openDataPicker() {
@@ -118,32 +127,120 @@ public class PopupFormPage extends BasePage {
     }
 
     public void findYearInCalendar(String year) {
-        String displayedYearText = displayedYear.getText();
+//        String displayedYearText = displayedYear.getText();
         yearMenu.click();
-        WebElement expectedYear = driver.findElement(By.xpath("//li[@class='o-itm o-v o-ditm'][text()='" + year + "']"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", expectedYear);
-        waitForVisibility(expectedYear);
-        clickOnElement(expectedYear);
+
+        if (Integer.parseInt(year) > 2006 && Integer.parseInt(year) < 2036) {
+            WebElement expectedYear = driver.findElement(By.xpath("//li[@class='o-itm o-v o-ditm'][text()='" + year + "']"));
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView();", expectedYear);
+            clickOnElement(expectedYear);
+        } else {
+            log.info("Menu does not support years before 2006 and after 2036. Change requirements");
+            driver.quit();
+        }
+
     }
 
     public void findMonthInCalendar(String month) {
         clickOnElement(monthMenu);
-        WebElement expectedMonth = driver.findElement(By.xpath("//li[contains(@class,'o-itm o-v ')][text()='" + month + "']"));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(expectedMonth).perform();
-        clickOnElement(expectedMonth);
+        int desiredMonth = changeMonthValuesIntoInteger(month);
+        if (desiredMonth > 0 && desiredMonth < 13) {
+            WebElement expectedMonth = driver.findElement(By.xpath("//li[contains(@class,'o-itm o-v ')][text()='" + month + "']"));
+//            String expectedMonthText = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+            Actions actions = new Actions(driver);
+            actions.moveToElement(expectedMonth).perform();
+            clickOnElement(expectedMonth);
+        } else {
+            log.info("There is no such month in calendar. Change requirements.");
+            driver.quit();
+        }
     }
 
     public void findDayInCalendar(String day) {
-        for (WebElement dayOnTheList : listOfDays) {
-            if (dayOnTheList.getText().equals(day)) {
-                waitUntilElementIsClickable(dayOnTheList);
-                clickOnElement(dayOnTheList);
+        if (Integer.parseInt(day) > 1 && Integer.parseInt(day) < 31)
+            for (WebElement dayOnTheList : listOfDays) {
+                if (dayOnTheList.getText().equals(day)) {
+                    waitUntilElementIsClickable(dayOnTheList);
+                    clickOnElement(dayOnTheList);
+                    break;
+
+                }
+            }
+        else {
+            log.info("There is no such day in calendar. Change requirements");
+            driver.quit();
+        }
+    }
+
+
+    public Integer changeMonthValuesIntoInteger(String month) {
+        int monthInt = 0;
+        switch (month) {
+            case "January":
+                monthInt = Month.JANUARY.getValue();
+                log.info("value of month is " + monthInt);
                 break;
 
-            }
+            case "February":
+                monthInt = Month.FEBRUARY.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "March":
+                monthInt = Month.MARCH.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "April":
+                monthInt = Month.APRIL.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "May":
+                monthInt = Month.MAY.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "June":
+                monthInt = Month.JUNE.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "July":
+                monthInt = Month.JULY.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "August":
+                monthInt = Month.AUGUST.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "September":
+                monthInt = Month.SEPTEMBER.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "October":
+                monthInt = Month.OCTOBER.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "November":
+                monthInt = Month.NOVEMBER.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            case "December":
+                monthInt = Month.DECEMBER.getValue();
+                log.info("value of month is " + monthInt);
+                break;
+
+            default:
+                log.info("Wrong month name was provided");
         }
+        return monthInt;
     }
 
     public void chooseChef() {
@@ -172,7 +269,7 @@ public class PopupFormPage extends BasePage {
             int randomIndex = getRandomListIndex(ingredientsList);
             log.info(randomIndex + " is random index");
 
-            if(ingredientsList.get(randomIndex).isDisplayed()){
+            if (ingredientsList.get(randomIndex).isDisplayed()) {
                 clickOnElement(ingredientArrowsList.get(randomIndex));
                 log.info(ingredientsList.get(randomIndex).getText() + " was chosen");
                 List<WebElement> ingredientsList = driver.findElements(By.xpath("//ul[@class='awe-ajaxlist awe-lookup-list awe-srl']/li[@class='awe-li']"));
