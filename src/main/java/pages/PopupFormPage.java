@@ -1,14 +1,18 @@
 package pages;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.time.Month;
 import java.util.List;
 
 public class PopupFormPage extends BasePage {
+    public PopupFormPage(WebDriver driver) {
+        super(driver);
+    }
 
     @FindBy(xpath = "//input[@id='createDinnerName-awed']")
     private WebElement nameInput;
@@ -39,6 +43,9 @@ public class PopupFormPage extends BasePage {
 
     @FindBy(css = "tr:nth-child(2), tr:nth-child(3), tr:nth-child(4), tr:nth-child(5), tr:nth-child(6), tr:nth-child(7)")
     private List<WebElement> listOfWeeks;
+
+    @FindBy(xpath = "//td[contains(@class,'o-day o-mday ')]")
+    private List<WebElement> listOfDays;
 
     @FindBy(xpath = "//td[@class='o-day o-mday o-enb']")
     private WebElement days;
@@ -88,29 +95,19 @@ public class PopupFormPage extends BasePage {
     @FindBy(xpath = "//div[@data-i='createDinner']/div[@class='o-pbtns']/button[@class='awe-btn awe-okbtn o-pbtn']")
     private WebElement mainOkBtn;
 
-    public PopupFormPage(WebDriver driver) {
-        super(driver);
-    }
+    @FindBy(xpath = "//ul[@class='awe-ajaxlist awe-lookup-list awe-srl']/li[@class='awe-li']/button[@class='awe-movebtn awe-btn']")
+    private List<WebElement> ingredientArrowsList;
 
 
     public void setName(String firstName) {
         waitForVisibility(nameInput);
+        highlightElements(nameInput);
         nameInput.sendKeys(firstName);
     }
 
     public void openDataPicker() {
         waitForVisibility(dateInput);
         clickOnElement(dateInput);
-    }
-
-    public void clickNextButton() {
-        nextButton.click();
-        log.info("'Next' button is chosen");
-    }
-
-    public void clickPreviousButton() {
-        waitForVisibility(previousButton);
-        clickOnElement(previousButton);
     }
 
     public void chooseDate(String year, String month, String day) {
@@ -122,8 +119,6 @@ public class PopupFormPage extends BasePage {
 
     public void findYearInCalendar(String year) {
         String displayedYearText = displayedYear.getText();
-        log.info(String.valueOf(displayedYearText));
-
         yearMenu.click();
         WebElement expectedYear = driver.findElement(By.xpath("//li[@class='o-itm o-v o-ditm'][text()='" + year + "']"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -133,24 +128,22 @@ public class PopupFormPage extends BasePage {
     }
 
     public void findMonthInCalendar(String month) {
-        String displayedMonthText = displayedMonth.getText();
-//        int integerDisplayedMonthValue = changeMonthValuesIntoInteger(displayedMonthText);
-        monthMenu.click();
-
-        WebElement expectedMonth = driver.findElement(By.xpath("//li[contains(@class,'o-itm o-v o-ditm')][text()='" + month + "']"));
-
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("arguments[0].scrollIntoView();", month);
-
+        clickOnElement(monthMenu);
+        WebElement expectedMonth = driver.findElement(By.xpath("//li[contains(@class,'o-itm o-v ')][text()='" + month + "']"));
         Actions actions = new Actions(driver);
         actions.moveToElement(expectedMonth).perform();
-        waitForVisibility(expectedMonth);
         clickOnElement(expectedMonth);
     }
 
+    public void findDayInCalendar(String day) {
+        for (WebElement dayOnTheList : listOfDays) {
+            if (dayOnTheList.getText().equals(day)) {
+                waitUntilElementIsClickable(dayOnTheList);
+                clickOnElement(dayOnTheList);
+                break;
 
-    public void waitUntilDataPickerIsClosed() {
-        waitForInvisibilityOfElement(datePicker);
+            }
+        }
     }
 
     public void chooseChef() {
@@ -172,29 +165,33 @@ public class PopupFormPage extends BasePage {
     public void chooseMeals() {
         waitUntilElementIsClickable(searchMealBtn);
         clickOnElement(searchMealBtn);
-
+        waitForVisibilityOfElements(ingredientsList);
         int i = 0;
         while (i < 3) {
-            waitForVisibilityOfElements(ingredientsList);
+
             int randomIndex = getRandomListIndex(ingredientsList);
-            WebElement ingredient = ingredientsList.get(randomIndex);
-            if (ingredient.isDisplayed()) {
-                actions.dragAndDrop(ingredient,boxForMeals );
-                log.info(ingredient.getText() +" was chosen");
-            } else {
-                waitForVisibility(moreBtn);
-                clickOnElement(moreBtn);
-                waitForVisibility(ingredient);
-                actions.dragAndDrop(ingredient,boxForMeals );
-                log.info(ingredient.getText() +" was chosen");
+            log.info(randomIndex + " is random index");
+
+            if(ingredientsList.get(randomIndex).isDisplayed()){
+                clickOnElement(ingredientArrowsList.get(randomIndex));
+                log.info(ingredientsList.get(randomIndex).getText() + " was chosen");
+                List<WebElement> ingredientsList = driver.findElements(By.xpath("//ul[@class='awe-ajaxlist awe-lookup-list awe-srl']/li[@class='awe-li']"));
             }
+
+            if (!ingredientsList.get(randomIndex).isDisplayed()) {
+                clickOnElement(moreBtn);
+                waitForVisibility(ingredientsList.get(randomIndex));
+                clickOnElement(ingredientArrowsList.get(randomIndex));
+            }
+            log.info("size of list is: " + ingredientsList.size());
+            List<WebElement> ingredientsList = driver.findElements(By.xpath("//ul[@class='awe-ajaxlist awe-lookup-list awe-srl']/li[@class='awe-li']"));
             i++;
         }
         waitUntilElementIsClickable(mealsOkBtn);
         clickOnElement(mealsOkBtn);
     }
 
-    public void chooseBonusMeal(){
+    public void chooseBonusMeal() {
         waitForVisibility(openingBonusMealBtn);
         clickOnElement(openingBonusMealBtn);
         waitForVisibility(bonusMealOptions);
@@ -204,112 +201,11 @@ public class PopupFormPage extends BasePage {
         clickOnElement(mainOkBtn);
     }
 
-   public void verifyPopupText(){
-       String actualText = getTextFromAlert();
-       String expectedText = System.getProperty("alertText");
-       verifyIfElementsEquals(expectedText, actualText);
-       acceptAlert();
-
-   }
-
-    public Integer changeMonthValuesIntoInteger(String month) {
-        int monthInt = 0;
-        switch (month) {
-            case "January":
-                monthInt = Month.JANUARY.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "February":
-                monthInt = Month.FEBRUARY.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "March":
-                monthInt = Month.MARCH.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "April":
-                monthInt = Month.APRIL.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "May":
-                monthInt = Month.MAY.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "June":
-                monthInt = Month.JUNE.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "July":
-                monthInt = Month.JULY.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "August":
-                monthInt = Month.AUGUST.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "September":
-                monthInt = Month.SEPTEMBER.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "October":
-                monthInt = Month.OCTOBER.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "November":
-                monthInt = Month.NOVEMBER.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            case "December":
-                monthInt = Month.DECEMBER.getValue();
-                log.info("value of month is " + monthInt);
-                break;
-
-            default:
-                log.info("Wrong month name was provided");
-        }
-        return monthInt;
-    }
-
-
-    public void findDayInCalendar(String day) {
-        for (WebElement week : listOfWeeks) {
-            List<WebElement> allDaysInWeek = week.findElements(By.xpath("//td[contains(@class,'o-day o-mday ')]"));
-            for (WebElement dayOnTheList : allDaysInWeek) {
-                String dayValue = dayOnTheList.getText();
-                System.out.println(dayValue);
-                if (dayValue.equals(day)) {
-                    waitForVisibility(dayOnTheList);
-                    System.out.println("element is visible");
-                    waitUntilElementIsClickable(dayOnTheList);
-                    System.out.println("element is clickable");
-                    dayOnTheList.click();
-                    driver.navigate().refresh();
-                    try {
-                        dayOnTheList.click();
-                    } catch (StaleElementReferenceException e) {
-                        List<WebElement> allDaysInWeekRefreshed = week.findElements(By.xpath("//td[contains(@class,'o-day o-mday ')]"));
-                        for (WebElement dayOnTheListRefreshed : allDaysInWeekRefreshed) {
-                            String dayValueRefreshed = dayOnTheListRefreshed.getText();
-                            if (dayValueRefreshed.equals(day)) {
-                                waitUntilElementIsClickable(dayOnTheList);
-                                dayOnTheList.click();
-                            }
-
-                        }
-                    }
-                }
-            }
-        }
+    public void verifyPopupText() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        String actualText = getTextFromAlert();
+        String expectedText = System.getProperty("alertText");
+        verifyIfElementsEquals(expectedText, actualText);
+        acceptAlert();
     }
 }

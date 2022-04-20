@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PopupFormDemoPage extends BasePage {
+    public PopupFormDemoPage(WebDriver driver) {
+        super(driver);
+    }
 
     @FindBy(xpath = "//button[text()='Create']")
     private WebElement createBtn;
@@ -12,12 +15,7 @@ public class PopupFormDemoPage extends BasePage {
     @FindBy(xpath = "//div[@id='Menu']")
     private WebElement menu;
 
-    public PopupFormDemoPage(WebDriver driver) {
-        super(driver);
-    }
-
     public void clickOnCreateBtn() {
-        waitForVisibility(createBtn);
         clickOnElement(createBtn);
     }
 }

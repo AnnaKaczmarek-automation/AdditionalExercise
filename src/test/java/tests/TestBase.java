@@ -12,20 +12,18 @@ import pages.BasePage;
 
 public class TestBase{
     protected static WebDriver driver;
-    private static Logger log = LoggerFactory.getLogger("BaseData.BaseTest.class");
+    private static Logger log = LoggerFactory.getLogger("TestBase.class");
     protected static BrowserEnvironment browserEnvironment;
     protected static EnvironmentProperty environmentProperty;
     protected static BasePage basePage;
 
 
-
     @BeforeAll
     static void beforeAll() {
         environmentProperty = EnvironmentProperty.getInstance();
-        log.info("Properties are set to system");
+        log.info("***** Properties are set to system *****");
         browserEnvironment = new BrowserEnvironment();
-        log.info("Browser properties are set to the system");
-
+        log.info("***** Browser properties are set to the system *****");
     }
 
     @BeforeEach

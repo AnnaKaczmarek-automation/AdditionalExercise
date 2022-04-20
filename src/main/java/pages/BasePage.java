@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +18,7 @@ public class BasePage{
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions actions;
+    Logger log = LoggerFactory.getLogger("BasePage.class");
 
 
     public BasePage(WebDriver driver) {
@@ -28,29 +28,22 @@ public class BasePage{
         actions = new Actions(driver);
     }
 
-
-
-
-    //    private static  PopupFormDemoPage popupFormDemoPage = new PopupFormDemoPage();
-    Logger log = LoggerFactory.getLogger("BasePage.class");
-
-
     public void clickOnElement(WebElement element) {
+        waitForVisibility(element);
+        highlightElements(element);
         element.click();
     }
 
     public void waitForVisibility(WebElement element) {
-        wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitUntilElementIsClickable(WebElement element) {
-        wait = new WebDriverWait(driver, 15);
+        highlightElements(element);
         wait.until(ExpectedConditions.elementToBeClickable(element));
 
     }
     public void waitForVisibilityOfElements(List<WebElement> elements) {
-        wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
@@ -87,7 +80,6 @@ public class BasePage{
     }
 
     public void waitForInvisibilityOfElement(WebElement element) {
-        wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.invisibilityOf(element));
 
     }
@@ -104,7 +96,7 @@ public class BasePage{
 
     public void highlightElements(WebElement element){
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].setAttribute('style', 'background: orange; border: 5px solid red;')");
+        js.executeScript("arguments[0].setAttribute('style', 'background:orange; border:5px solid red;')", element);
         try{
             Thread.sleep(1500);
         } catch (InterruptedException e){

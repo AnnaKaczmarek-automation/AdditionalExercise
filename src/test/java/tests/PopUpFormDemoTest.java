@@ -14,11 +14,10 @@ public class PopUpFormDemoTest extends TestBase {
     Logger log = LoggerFactory.getLogger("PopUpFormDemoTest");
 
     @Test
-    public void fillingPopupFormTest() throws InterruptedException {
+    public void fillingPopupFormTest(){
         homePage = new HomePage(driver);
         popupFormDemoPage = new PopupFormDemoPage(driver);
         popupFormPage = new PopupFormPage(driver);
-
 
         homePage.closeCookiesPopup();
         log.info("Cookies popup is closed");
@@ -29,16 +28,14 @@ public class PopUpFormDemoTest extends TestBase {
         popupFormPage.setName(System.getProperty("firstName"));
         log.info("Name is set Name field");
         popupFormPage.chooseDate(System.getProperty("year"), System.getProperty("month"), System.getProperty("day"));
-        popupFormPage.waitUntilDataPickerIsClosed();
+        log.info("Date is chosen");
         popupFormPage.chooseChef();
         log.info("Chef option is chosen");
         popupFormPage.chooseMeals();
         log.info("Meals ale chosen");
         popupFormPage.chooseBonusMeal();
         log.info("Bonus meal is chosen");
-//        popupFormPage.verifyPopupText();
-//        log.info("Popup message is correct");
-
-
+        popupFormPage.verifyPopupText();
+        log.info("Popup message is correct");
     }
 }
